@@ -7551,7 +7551,7 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
             nodes,
             i;
 
-        //dont bother modifying the DOM if we are already in full page mode.
+        // dont bother modifying the DOM if we are already in full page mode.
         if ( fullPage == this.isFullPage() ) {
             return this;
         }
@@ -7803,6 +7803,7 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                         _this.element.style.width = _this.fullPageStyleWidth;
                         _this.element.style.height = _this.fullPageStyleHeight;
                     }
+                    updateAnnotationList();
                 }
                 if ( _this.navigator && _this.viewport ) {
                     _this.navigator.update( _this.viewport );
@@ -10847,7 +10848,7 @@ $.TileSource = function( width, height, tileSize, tileOverlap, minLevel, maxLeve
         this.aspectRatio = ( options.width && options.height ) ?
             (  options.width / options.height ) : 1;
         this.dimensions  = new $.Point( options.width, options.height );
-        
+
         if ( this.tileSize ){
             this._tileWidth = this._tileHeight = this.tileSize;
             delete this.tileSize;
@@ -10869,7 +10870,7 @@ $.TileSource = function( width, height, tileSize, tileOverlap, minLevel, maxLeve
                 this._tileHeight = 0;
             }
         }
-        
+
         this.tileOverlap = options.tileOverlap ? options.tileOverlap : 0;
         this.minLevel    = options.minLevel ? options.minLevel : 0;
         this.maxLevel    = ( undefined !== options.maxLevel && null !== options.maxLevel ) ?
@@ -10897,7 +10898,7 @@ $.TileSource.prototype = /** @lends OpenSeadragon.TileSource.prototype */{
         );
         return this._tileWidth;
     },
-    
+
     /**
      * Return the tileWidth for a given level.
      * Subclasses should override this if tileWidth can be different at different levels
@@ -10988,7 +10989,7 @@ $.TileSource.prototype = /** @lends OpenSeadragon.TileSource.prototype */{
               Math.floor( rect.x / this.getTileWidth(i) ),
               Math.floor( rect.y / this.getTileHeight(i) )
             );
-            
+
             if( tiles.x + 1 >= tilesPerSide.x && tiles.y + 1 >= tilesPerSide.y ){
                 break;
             }
@@ -11799,7 +11800,7 @@ $.extend( $.IIIFTileSource.prototype, $.TileSource.prototype, /** @lends OpenSea
      * @param {Object|Array} data
      * @param {String} optional - url
      */
-     
+
     supports: function( data, url ) {
         // Version 2.0 and forwards
         if (data.protocol && data.protocol == 'http://iiif.io/api/image') {
@@ -15709,7 +15710,7 @@ $.Drawer.prototype = /** @lends OpenSeadragon.Drawer.prototype */{
 
         this.context.save();
         this.context.globalAlpha = opacity;
-        this.context.globalCompositeOperation = "lighter"; 
+        this.context.globalCompositeOperation = "lighter";
         this.context.drawImage(this.sketchCanvas, 0, 0);
         this.context.restore();
     },
@@ -17227,7 +17228,7 @@ $.TiledImage = function( options ) {
         lastResetTime:  0,     // Last time for which the tiledImage was reset.
         _midDraw:       false, // Is the tiledImage currently updating the viewport?
         _needsDraw:     true,  // Does the tiledImage need to update the viewport again?
-        _hasOpaqueTile: false,  // Do we have even one fully opaque tile? 
+        _hasOpaqueTile: false,  // Do we have even one fully opaque tile?
 
         //configurable settings
         springStiffness:      $.DEFAULT_SETTINGS.springStiffness,
@@ -19179,5 +19180,3 @@ $.extend( $.World.prototype, $.EventSource.prototype, /** @lends OpenSeadragon.W
 });
 
 }( OpenSeadragon ));
-
-
